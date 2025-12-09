@@ -1,4 +1,15 @@
-/*
-  Переменные для вашего проекта
-  и их переопределение под различные устройства
-*/
+:root {
+  --background: #000028;
+  --accent: #ff0070;
+  --text: #f1b2ce;
+  --image: url("../images/cover-image-dark.png");
+  --header: #db00ff;
+}
+
+ .section-title {
+  color: var(--accent);
+}
+
+ .text-accent {
+  color: var(--background);
+}

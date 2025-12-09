@@ -1,5 +1,354 @@
-/* Основные стили проекта. Это стили для темы, которую вы верстаете первой. */
+.body {
+  margin: 0 auto;
+  background-color: var(--background);
+  background: var(--image) center/cover fixed no-repeat;
+  color: var(--text);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 18px;
+  line-height: 23.4px;
+}
 
-.page {
-  /* сохраните в разметке и стилях класс page у тега body. Он удобен, чтобы составлять селекторы для разных цветовых тем. */
+.header,
+.footer {
+  display: grid;
+  position: relative;
+  min-height: 668px;
+  height: 100vh;
+  padding: 10px;
+}
+
+@media (768px <= width) {
+  .header,
+  .footer {
+    padding: 20px;
+  }
+}
+
+.header {
+  grid-template-rows: 1fr min-content 1fr;
+}
+
+.header::before,
+.footer::before {
+  content: "";
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  width: 25px;
+  height: 25px;
+  border-left: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+@media (768px <= width) {
+  .header::before,
+  .footer::before {
+    left: 20px;
+    bottom: 20px;
+  }
+}
+
+.header::after,
+.footer::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  border-top: 1px solid var(--accent);
+  border-right: 1px solid var(--accent);
+}
+
+.header__rec {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  height: 25px;
+  color: var(--accent);
+}
+
+@media (768px <= width) {
+  .header::after,
+  .footer::after,
+  .header__rec {
+    top: 20px;
+    right: 20px;
+  }
+}
+
+.header__rec::after {
+  content: "";
+  width: 9px;
+  height: 9px;
+  margin: 0 9px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  box-shadow: 0 0 4px 2px var(--accent);
+}
+
+.header__theme-menu {
+  margin: auto 0 auto auto;
+}
+
+@media (1024px <= width) {
+  .header__theme-menu {
+    margin: 0 auto auto;
+  }
+}
+
+.header__theme-menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media (1024px <= width) {
+  .header__theme-menu-list {
+    flex-direction: row;
+  }
+}
+
+.header__theme-menu-button {
+  width: 70px;
+  padding: 3px 13px 5px;
+  background-color: transparent;
+  border: none;
+  color: var(--accent);
+  line-height: 18px;
+}
+
+.header__theme-menu-button-text {
+  position: relative;
+}
+
+.header__theme-menu-button_active {
+  pointer-events: none;
+}
+
+.header__theme-menu-button:hover::after,
+.header__theme-menu-button_active::after,
+.header__theme-menu-button:focus-visible::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.header__theme-menu-button:hover::after,
+.header__theme-menu-button_active::after {
+  border: 1px solid var(--accent);
+}
+
+.header__theme-menu-button:not(.header__theme-menu-button_active):hover::after {
+  opacity: 0.4;
+}
+
+.header__theme-menu-button:focus-visible::after {
+  border-bottom: 1px solid var(--accent);
+}
+
+.header__title,
+.footer__title {
+  color: var(--header);
+  text-shadow: 4px 4px 0 var(--accent);
+  font-size: clamp(7.25rem, 7.0714rem + 0.8929vw, 7.5rem);
+  line-height: 83%;
+}
+
+@media (768px <= width) {
+  .header__title {
+    position: relative;
+    left: -20px;
+    font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+  }
+
+  .footer__title {
+    font-size: clamp(7.5rem, 0.5625rem + 14.4531vw, 9.8125rem);
+  }
+}
+
+.header__title-accent {
+  margin: auto 0;
+}
+
+@media (768px <= width) {
+  .header__title-accent {
+    width: 50%;
+    margin-left: auto;
+  }
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0;
+  padding: 0 10px;
+  gap: 50px;
+}
+
+@media (768px <= width) {
+  .main {
+    margin: 60px 0;
+    padding: 0 20px;
+    gap: 80px;
+  }
+}
+
+.section {
+  display: grid;
+  gap: 10px 20px;
+}
+
+@media (768px <= width) {
+  .section {
+    grid-template-columns: 1fr 2fr;
+  }
+
+  .first .section-title:first-child {
+    grid-row: span 2;
+  }
+  
+  .third .section-title:first-child {
+    grid-row: span 3;
+  }
+
+  .section:not(.second, .images) .text-accent,
+  .section:not(.second, .images) .section-text {
+    grid-column: 2 / -1;
+  }
+
+  .second .text-accent,
+  .second .section-text {
+    grid-column: span 3;
+  }
+}
+
+@media (1024px <= width) {
+  .second {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .second .text-accent,
+  .second .section-text {
+    grid-column: auto;
+  }
+
+  .second .text-accent {
+    grid-row: 2;
+  }
+
+  .second .section-text {
+    grid-row: 3;
+    margin: 0;
+  }
+}
+
+.link {
+  text-shadow: 2px 2px 0 var(--accent);
+}
+
+.link:hover::after,
+.link:focus-visible::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: 100%;
+}
+
+.link:hover::after {
+  border-bottom: 1px solid var(--text);
+}
+
+.link:focus-visible::after {
+  border: 1px solid var(--text);
+}
+
+@media (768px <= width) {
+  .images {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: repeat(4, min-content);
+    gap: 20px;
+  }
+
+  .images .text-accent {
+    grid-column: span 3;
+  }
+}
+
+.image {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.image:nth-child(2) {
+  grid-row: 2;
+}
+
+.image:nth-child(3) {
+  grid-row: 3;
+}
+
+.image:nth-child(4) {
+  grid-row: 6;
+}
+
+.image:nth-child(5) {
+  grid-row: 4;
+}
+
+@media (768px <= width) {
+  .image:nth-child(2) {
+    grid-column: span 2;
+    grid-row: 2;
+  }
+
+  .image:nth-child(3) {
+    grid-column: 3;
+    grid-row: span 2;
+  }
+
+  .image:nth-child(4) {
+    grid-column: span 2;
+    grid-row: 4;
+  }
+
+  .image:nth-child(5) {
+    grid-column: 1;
+    grid-row: 3 / -1;
+  }
+}
+
+.margin {
+  margin-bottom: 10px;
+}
+
+.interactive {
+  position: relative;
+  cursor: pointer;
+}
+
+.interactive:focus {
+  outline: none;
+}
+
+.text-accent {
+  background-color: var(--accent);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.footer {
+  align-content: center;
+  justify-content: center;
 }
